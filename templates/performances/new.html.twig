@@ -1,0 +1,78 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}New Performances
+{% endblock %}
+
+{% block body %}
+	<!-- Content Wrapper. Contains page content -->
+	<div
+		class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		{% include "breadcrumb.html.twig" %}
+		<!-- Main content -->
+		<section class="content">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Listes exercises</h3>
+				</div>
+				<!-- /.card-header -->
+				<div
+					class="card-body">
+					<!-- / Met le code ici du tableau  -->
+
+					<h1>Create new Performances</h1>
+
+					{{ form_start(form) }}
+					<div class="ibox-content">
+						<div class="form-horizontal">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="col-sm-2">
+											{{ form_label(form.resultat) }}
+										</div>
+										<div class="col-sm-10">
+											{{ form_widget(form.resultat, { 'attr': {'class': 'form-control'} }) }}
+										</div>
+									</div>
+								</div>
+                                <div class="col-lg-6">
+									<div class="form-group">
+										<div class="col-sm-2">
+											{{ form_label(form.exercice) }}
+										</div>
+										<div class="col-sm-10">
+											{{ form_widget(form.exercice, { 'attr': {'class': 'form-control'} }) }}
+										</div>
+									</div>
+								</div>
+								
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<input class="btn btn-primary total-width" type="submit" value="{% trans %}Valider{% endtrans %}"/>
+							<a class="btn btn-warning total-width" href="{{ path('app_performances_index') }}">back to list</a>
+						</div>
+					</div>
+
+
+					<div class="hidden">
+						{{ form_widget(form) }}
+					</div>
+					{{ form_end(form) }}
+
+
+					<a href="{{ path('app_performances_index') }}">back to list</a>
+				</div>
+				<!-- /.card-body -->
+
+
+			</div>
+			<!-- /.card -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+{% endblock %}

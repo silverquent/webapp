@@ -1,0 +1,61 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}User
+{% endblock %}
+
+{% block body %}
+	<!-- Content Wrapper. Contains page content -->
+	<div
+		class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		{% include "breadcrumb.html.twig" %}
+		<!-- Main content -->
+		<section class="content">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Listes exercises</h3>
+				</div>
+				<!-- /.card-header -->
+				<div class="card-body">
+					<!-- / Met le code ici du tableau  -->
+					<!-- /.content-wrapper --><h1>
+					User
+					</h1>
+
+						<table class="table"> <tbody>
+							<tr>
+								<th>Id</th>
+								<td>{{ user.id }}</td>
+							</tr>
+							<tr>
+								<th>Email</th>
+								<td>{{ user.email }}</td>
+							</tr>
+							<tr>
+								<th>Roles</th>
+								<td>{{ user.roles ? user.roles|json_encode : '' }}</td>
+							</tr>
+							<tr>
+								<th>Password</th>
+								<td>{{ user.password }}</td>
+							</tr>
+						</tbody>
+					</table>
+
+					<a href="{{ path('app_user_index') }}">back to list</a>
+
+					<a href="{{ path('app_user_edit', {'id': user.id}) }}">edit</a>
+
+					{{ include('user/_delete_form.html.twig') }}
+
+				</div>
+				<!-- /.card-body -->
+				<a href="{{ path('app_performances_new') }}">Create new</a>
+
+			</div>
+			<!-- /.card -->
+		</section>
+		<!-- /.content -->
+	</div>
+
+{% endblock %}

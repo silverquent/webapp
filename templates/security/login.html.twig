@@ -1,0 +1,74 @@
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>
+			{% block title %}Welcome!
+			{% endblock %}
+		</title>
+		<link
+		rel="icon" href="data:image/svg+xml,<svg xmlns=%22http://www.w3.org/2000/svg%22 viewBox=%220 0 128 128%22><text y=%221.2em%22 font-size=%2296%22>⚫️</text></svg>">
+		{# Run `composer require symfony/webpack-encore-bundle` to start using Symfony UX #}
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('login') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('login') }}
+		{% endblock %}
+	</head>
+	<body id="particles-js"></body>
+
+
+	<div class="animated bounceInDown">
+		<div class="container">
+			<span class="error animated tada" id="msg"></span>
+
+
+			<form name="form1" method="post" class="box" onsubmit="return checkStuff()">
+				<h4>Oihan<span>Dashboard</span>
+				</h4>
+				<h5>Sign in to your account.</h5>
+
+				{% if error %}
+					<div class="alert alert-danger">{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+				{% endif %}
+
+
+				<input type="email" value="{{ last_username }}" placeholder="Email" name="email" id="inputEmail" class="form-control" autocomplete="email" required autofocus>
+				<i class="typcn typcn-eye" id="eye"></i>
+				<input type="password" name="password" placeholder="Passsword" id="pwd" autocomplete="off" id="inputPassword" class="form-control" autocomplete="current-password" required>
+				
+				
+
+
+				<input
+				type="hidden" name="_csrf_token" value="{{ csrf_token('authenticate') }}">
+
+				{#
+														Uncomment this section and add a remember_me option below your firewall to activate remember me functionality.
+														See https://symfony.com/doc/current/security/remember_me.html
+												
+														<div class="checkbox mb-3">
+															<label>
+																<input type="checkbox" name="_remember_me"> Remember me
+															</label>
+														</div>
+														<label>
+				<input type="checkbox">
+				<span></span>
+				<small class="rmb">Remember me</small>
+			</label>
+													#}
+
+				<button class=" btn1 " type="submit">
+					Sign in
+				</button>
+			</form>
+			{#
+			<a href="#" class="dnthave">Don’t have an account? Sign up</a>
+			#}
+		</div>
+
+
+	</html>
+</html>

@@ -1,0 +1,116 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Edit User
+{% endblock %}
+
+{% block body %}
+	<!-- Content Wrapper. Contains page content -->
+	<div
+		class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		{% include "breadcrumb.html.twig" %}
+		<!-- Main content -->
+		<section class="content">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Listes exercises</h3>
+				</div>
+				<!-- /.card-header -->
+				<div
+					class="card-body">
+					<!-- / Met le code ici du tableau  -->
+
+					<h1>Edit User</h1>
+
+					{{ form_start(form) }}
+					<div class="ibox-content">
+						<div class="form-horizontal">
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="col-sm-2">
+											{{ form_label(form.lastname) }}
+										</div>
+										<div class="col-sm-10">
+											{{ form_widget(form.lastname, { 'attr': {'class': 'form-control'} }) }}
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="col-sm-2">
+											{{ form_label(form.firstname) }}
+										</div>
+										<div class="col-sm-10">
+											{{ form_widget(form.firstname, { 'attr': {'class': 'form-control'} }) }}
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="col-sm-2">
+											{{ form_label(form.job) }}
+										</div>
+										<div class="col-sm-10">
+											{{ form_widget(form.job, { 'attr': {'class': 'form-control '} }) }}
+										</div>
+									</div>
+								</div>
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="col-sm-2">
+											{{ form_label(form.email) }}
+										</div>
+										<div class="col-sm-10">
+											{{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+										</div>
+									</div>
+								</div>
+								{% if is_granted('ROLE_ADMIN') %}  
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="col-sm-2">
+											{{ form_label(form.roles) }}
+										</div>
+										<div class="col-sm-10">
+											{{ form_widget(form.roles, { 'attr': {'class': 'form-control '} }) }}
+										</div>
+									</div>
+								</div>
+								{% endif %}
+							</div>
+							<div class="row">
+								<div class="col-lg-6">
+									<div class="form-group">
+										<div class="col-sm-2">
+											{{ form_label(form.images) }}
+										</div>
+										<div class="col-sm-10">
+											{{ form_widget(form.images, { 'attr': {'class': 'form-control'} }) }}
+										</div>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+					<div class="row">
+						<div class="col-lg-12">
+							<input class="btn btn-primary total-width" type="submit" value="{% trans %}Valider{% endtrans %}"/>
+							<a class="btn btn-secondary total-width" href="{{ path('app_exercices_index') }}">Retour</a>
+						</div>
+					</div>
+					<div class="hidden">
+						{{ form_widget(form) }}
+					</div>
+					{{ form_end(form) }}
+				</div>
+				<!-- /.card-body -->
+
+
+			</div>
+			<!-- /.card -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+{% endblock %}

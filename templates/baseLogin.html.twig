@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="fr">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>oihan | Log in
+		</title>
+		{% block stylesheets %}
+			{{ encore_entry_link_tags('app') }}
+		{% endblock %}
+
+		{% block javascripts %}
+			{{ encore_entry_script_tags('app') }}
+		{% endblock %}
+	</head>
+	<body class="hold-transition login-page">
+		<div
+			class="login-box">
+			<!-- /.login-logo -->
+			<div class="card card-outline card-primary">
+				<div class="card-header text-center">
+					<a href="../../index2.html" class="h1">
+						<b>Admin</b>LTE</a>
+				</div>
+				<div class="card-body">
+					<p class="login-box-msg">Sign in to start your session</p>
+					{% block body %}
+          {% endblock %}
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+		</div>
+		<!-- /.login-box -->
+	</body>
+</html>

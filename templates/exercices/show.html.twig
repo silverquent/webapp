@@ -1,0 +1,74 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Exercices
+{% endblock %}
+
+{% block body %}
+	<!-- Content Wrapper. Contains page content -->
+	<div
+		class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		{% include "breadcrumb.html.twig" %}
+		<!-- Main content -->
+		<section class="content">
+			<div class="card card-solid">
+				<div class="card-body">
+					<div class="card-header">
+						<h3 class="card-title">{{ exercice.name }}</h3>
+					</div>
+					<!-- /.card-header -->
+					<div
+						class="card-body">
+						<!-- / Met le code ici du tableau  -->
+						<div class="row mb-3 justify-content-center">
+							<div class="col-sm-6">
+								{% for image in exercices.images %}
+									{% if loop.first %}
+										<img class="img-fluid" src="{{asset('/uploads/exercices/' ~ image.name )}}" alt="Photo">
+									{% endif %}
+								{% endfor %}
+
+							</div>
+						</div>
+					</div>
+					<div class="row mt-4">
+						<nav class="w-100">
+							<div class="nav nav-tabs" id="product-tab" role="tablist">
+								<a class="nav-item nav-link active" id="product-desc-tab" data-toggle="tab" href="#product-desc" role="tab" aria-controls="product-desc" aria-selected="true">Description</a>
+								<a class="nav-item nav-link" id="product-comments-tab" data-toggle="tab" href="#product-comments" role="tab" aria-controls="product-comments" aria-selected="false">Conseils</a>
+								<a class="nav-item nav-link" id="product-rating-tab" data-toggle="tab" href="#product-rating" role="tab" aria-controls="product-rating" aria-selected="false">Démo</a>
+							</div>
+						</nav>
+						<div class="tab-content p-3" id="nav-tabContent">
+							<div class="tab-pane fade active show" id="product-desc" role="tabpanel" aria-labelledby="product-desc-tab">
+								{% if exercice.texte  is empty %}
+									En préparation.
+								{% else %}
+									{{exercice.texte}}
+								{% endif %}
+							</div>
+							<div class="tab-pane fade" id="product-comments" role="tabpanel" aria-labelledby="product-comments-tab">
+								{% if exercice.conseils  is empty %}
+									En préparation.
+								{% else %}
+									{{exercice.conseils}}
+								{% endif %}
+							</div>
+							<div class="tab-pane fade" id="product-rating" role="tabpanel" aria-labelledby="product-rating-tab">
+								{% if exercice.demo  is empty %}
+									En préparation.
+								{% else %}
+									{{exercice.demo}}
+								{% endif %}
+							</div>
+						</div>
+					</div>
+				</div>
+				<!-- /.card-body -->
+			</div>
+			<!-- /.card -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+{% endblock %}

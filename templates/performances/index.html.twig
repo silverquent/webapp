@@ -1,0 +1,79 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}Performances index
+{% endblock %}
+
+{% block body %}
+	<!-- Content Wrapper. Contains page content -->
+	<div
+		class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		{% include "breadcrumb.html.twig" %}
+		<!-- Main content -->
+		<section class="content">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Listes exercises</h3>
+				</div>
+				<!-- /.card-header -->
+				<div
+					class="card-body">
+					<!-- / Met le code ici du tableau  -->
+
+					<table id="table" class="table table-striped" style="width:100%">
+						<thead>
+							<tr>
+								<th>Index</th>
+								<th>Resultat
+								</th>
+								<th>Exercice
+								</th>
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for performance in performances %}
+								<tr>
+									<td>{{ performance.id }}</td>
+									<td>{{ performance.date|date("d/m/Y")}}</td>
+									<td>{{ performance.exercice.name }}</td>
+									<td>{{ performance.resultat }}kgs</td>
+									<td>
+										<a class="btn btn-primary ml-1" href="{{ path('app_performances_show', {'id': performance.id}) }}">
+											<i class="fa fa-eye"></i>
+										</a>
+										<a class="btn btn-success ml-1" href="{{ path('app_performances_edit', {'id': performance.id}) }}">
+											<i class="fa fa-edit"></i>
+										</a>
+									</td>
+								</tr>
+							{% else %}
+								<tr>
+									<td colspan="4">no records found</td>
+								</tr>
+							{% endfor %}
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>Index</th>
+								<th>Resultat
+								</th>
+								<th>Exercice
+								</th>
+								<th>Actions</th>
+							</tr>
+						</tfoot>
+					</table>
+				</div>
+				<!-- /.card-body -->
+				<a href="{{ path('app_performances_new') }}">Create new</a>
+
+			</div>
+			<!-- /.card -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+
+
+{% endblock %}

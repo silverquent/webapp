@@ -1,0 +1,29 @@
+DROP DATABASE IF EXISTS db_users;
+CREATE DATABASE db_users;
+DROP USER IF EXISTS 'user'@'%';
+DROP USER IF EXISTS 'user'@'localhost';
+CREATE USER 'user'@'%' IDENTIFIED BY 'password';
+GRANT SELECT, INSERT, UPDATE, DELETE, CREATE, INDEX, DROP, ALTER, CREATE TEMPORARY TABLES, LOCK TABLES ON db_users.* TO 'user'@'%';
+FLUSH PRIVILEGES;
+
+use db_users ;
+
+DROP TABLE IF EXISTS `USERS`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `USERS` (
+  `NAME` varchar(50) NOT NULL,
+  `EMAIL` varchar(100) NOT NULL,
+  PRIMARY KEY (`NAME`)
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Dumping data for table `USERS`
+--
+
+LOCK TABLES `USERS` WRITE;
+/*!40000 ALTER TABLE `USERS` DISABLE KEYS */;
+INSERT INTO `USERS` VALUES ('guilhelm','gpyd31@gmail.com'),('joe','joe@gmail.com'),('lisa','lisa@gmail.com'),('mike','mike@gmail.com'),('suzy','suzy@gmail.com');
+/*!40000 ALTER TABLE `USERS` ENABLE KEYS */;
+UNLOCK TABLES;

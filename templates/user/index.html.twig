@@ -1,0 +1,71 @@
+{% extends 'adminBase.html.twig' %}
+
+{% block title %}User index
+{% endblock %}
+
+{% block body %}
+	<!-- Content Wrapper. Contains page content -->
+	<div
+		class="content-wrapper">
+		<!-- Content Header (Page header) -->
+		{% include "breadcrumb.html.twig" %}
+		<!-- Main content -->
+		<section class="content">
+			<div class="card">
+				<div class="card-header">
+					<h3 class="card-title">Listes exercises</h3>
+				</div>
+				<!-- /.card-header -->
+				<div
+					class="card-body">
+					<!-- / Met le code ici du tableau  -->
+
+					<div class="row justify-content-center">
+						{% for user in users %}
+							<div class="col-12 col-sm-6 col-md-4 col-lg-3">
+								<div class="our-team">
+									<div class="picture">
+										{% if user.image  is empty %}
+											<img class="img-fluid" src="{{ asset('/img/avatar/avatar' ~ random(1, 5) ~ '.png' )| imagine_filter('my_thumb') }}"/>
+										{% else %}
+											<img class="img-fluid" src="{{ asset('/uploads/users/' ~ user.image )| imagine_filter('my_thumb') }}"/>
+										{% endif %}
+
+									</div>
+									<div class="team-content">
+										<h3 class="name">{{user.lastname|capitalize}}
+											{{user.firstname|capitalize}}</h3>
+										{% if user.job  is empty %}
+											<h4 class="title">abonné</h4>
+										{% else %}
+											<h4 class="title">{{user.job}}</h4>
+										{% endif %}
+									</div>
+									<ul class="social">
+										<li>
+											<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="fas fa-edit" aria-hidden="true"></a>
+										</li>
+										<li>
+											<a href="{{ path('app_user_show', {'id': user.id}) }}" class="fas fa-eye" aria-hidden="true"></a>
+										</li>
+									</ul>
+								</div>
+							</div>
+						{% else %}
+							a Remplir
+						{% endfor %}
+					</div>
+					<a class="btn btn-primary ml-1" href="{{ path('app_user_new') }}">
+						<i class="fa fa-plus"></i>
+					</a>
+				</div>
+				<!-- /.card-body -->
+
+
+			</div>
+			<!-- /.card -->
+		</section>
+		<!-- /.content -->
+	</div>
+	<!-- /.content-wrapper -->
+{% endblock %}
