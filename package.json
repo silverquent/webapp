@@ -23,6 +23,12 @@
         "build": "encore production --progress"
     },
     "dependencies": {
+        "@fullcalendar/bootstrap5": "^5.11.3",
+        "@fullcalendar/core": "^5.11.3",
+        "@fullcalendar/daygrid": "^5.11.3",
+        "@fullcalendar/interaction": "^5.11.3",
+        "@fullcalendar/list": "^5.11.3",
+        "@fullcalendar/timegrid": "^5.11.3",
         "@googlemaps/js-api-loader": "^1.14.3",
         "bootstrap": "5.2.2",
         "datatables.net-bs5": "^1.12.1",

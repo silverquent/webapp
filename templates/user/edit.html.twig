@@ -4,113 +4,175 @@
 {% endblock %}
 
 {% block body %}
-	<!-- Content Wrapper. Contains page content -->
-	<div
-		class="content-wrapper">
-		<!-- Content Header (Page header) -->
-		{% include "breadcrumb.html.twig" %}
-		<!-- Main content -->
-		<section class="content">
-			<div class="card">
-				<div class="card-header">
-					<h3 class="card-title">Listes exercises</h3>
-				</div>
-				<!-- /.card-header -->
-				<div
-					class="card-body">
-					<!-- / Met le code ici du tableau  -->
-
-					<h1>Edit User</h1>
-
-					{{ form_start(form) }}
-					<div class="ibox-content">
-						<div class="form-horizontal">
-							<div class="row">
-								<div class="col-lg-6">
-									<div class="form-group">
-										<div class="col-sm-2">
-											{{ form_label(form.lastname) }}
-										</div>
-										<div class="col-sm-10">
-											{{ form_widget(form.lastname, { 'attr': {'class': 'form-control'} }) }}
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-6">
-									<div class="form-group">
-										<div class="col-sm-2">
-											{{ form_label(form.firstname) }}
-										</div>
-										<div class="col-sm-10">
-											{{ form_widget(form.firstname, { 'attr': {'class': 'form-control'} }) }}
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-6">
-									<div class="form-group">
-										<div class="col-sm-2">
-											{{ form_label(form.job) }}
-										</div>
-										<div class="col-sm-10">
-											{{ form_widget(form.job, { 'attr': {'class': 'form-control '} }) }}
-										</div>
-									</div>
-								</div>
-								<div class="col-lg-6">
-									<div class="form-group">
-										<div class="col-sm-2">
-											{{ form_label(form.email) }}
-										</div>
-										<div class="col-sm-10">
-											{{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
-										</div>
-									</div>
-								</div>
-								{% if is_granted('ROLE_ADMIN') %}  
-								<div class="col-lg-6">
-									<div class="form-group">
-										<div class="col-sm-2">
-											{{ form_label(form.roles) }}
-										</div>
-										<div class="col-sm-10">
-											{{ form_widget(form.roles, { 'attr': {'class': 'form-control '} }) }}
-										</div>
-									</div>
-								</div>
-								{% endif %}
-							</div>
-							<div class="row">
-								<div class="col-lg-6">
-									<div class="form-group">
-										<div class="col-sm-2">
-											{{ form_label(form.images) }}
-										</div>
-										<div class="col-sm-10">
-											{{ form_widget(form.images, { 'attr': {'class': 'form-control'} }) }}
-										</div>
-									</div>
-								</div>
-							</div>
-						</div>
-					</div>
-					<div class="row">
-						<div class="col-lg-12">
-							<input class="btn btn-primary total-width" type="submit" value="{% trans %}Valider{% endtrans %}"/>
-							<a class="btn btn-secondary total-width" href="{{ path('app_exercices_index') }}">Retour</a>
-						</div>
-					</div>
-					<div class="hidden">
-						{{ form_widget(form) }}
-					</div>
-					{{ form_end(form) }}
-				</div>
-				<!-- /.card-body -->
-
-
+	{% for message in app.flashes('success') %}
+		<div class="alert alert-success alert-outline-coloured alert-dismissible" role="alert">
+			<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+			<div class="alert-icon">
+				<i class="far fa-fw fa-bell"></i>
 			</div>
-			<!-- /.card -->
-		</section>
-		<!-- /.content -->
-	</div>
+			<div class="alert-message">
+				{{ message }}
+			</div>
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('danger') %}
+		<div class="alert alert-danger mt-5">
+			{{ message }}
+		</div>
+	{% endfor %}
+	{% for message in app.flashes('info') %}
+		<div class="alert alert-info mt-5">
+			{{ message }}
+		</div>
+	{% endfor %}
 	<!-- /.content-wrapper -->
+	<div class="container-fluid p-0">
+		
+		<h1 class="h3 mb-3">Paramètres</h1>
+		<div class="row">
+			<div class="col-md-3 col-xl-2">
+				<div class="card">
+					<div class="card-header">
+						<h5 class="card-title mb-0">Profil Paramétrage</h5>
+					</div>
+					<div class="list-group list-group-flush" role="tablist">
+						<a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#account" role="tab" aria-selected="true">
+							Compte
+						</a>
+						<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password" role="tab" aria-selected="false" tabindex="-1">
+							Sécurité
+						</a>
+						<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab" aria-selected="false" tabindex="-1">
+							Supprimer compte
+						</a>
+					</div>
+				</div>
+			</div>
+			<div class="col-md-9 col-xl-10">
+				<div class="tab-content">
+
+					<div class="tab-pane fade show active" id="account" role="tabpanel">
+
+						<div class="card">
+							<div class="card-header">
+
+								<h5 class="card-title mb-0">Public info</h5>
+							</div>
+							{{ form_start(formTest) }}
+							<div class="card-body">
+
+								<div class="row">
+									<div class="col-md-8">
+										<div class="mb-3">
+											{{ form_label(formTest.username,'', {'label_attr': {'class': 'form-label'}}) }}
+											{{ form_widget(formTest.username, { 'attr': {'class': 'form-control'} }) }}
+										</div>
+										<div class="mb-3">
+											{{ form_label(formTest.description,'', {'label_attr': {'class': 'form-label'}}) }}
+											{{ form_widget(formTest.description, { 'attr': {'class': 'form-control'} }) }}
+										</div>
+									</div>
+									<div class="col-md-4">
+										<div class="text-center">
+											{% if user.image  is empty %}
+												<img alt="Utilisateur avatar" src="{{ asset('/img/avatar/avatar' ~ random(1, 5) ~ '.png' )| imagine_filter('my_thumb') }}" class="rounded-circle img-responsive mt-2" width="128" height="128">
+											{% else %}
+												<img alt="Utilisateur photo" src="{{ asset('/uploads/users/' ~ app.user.image )| imagine_filter('my_thumb') }}" class="rounded-circle img-responsive mt-2" width="128" height="128">
+											{% endif %}
+											<div class="mt-2">
+												{{ form_widget(form.images, { 'attr': {'class': 'form-control'} }) }}
+											</div>
+										</div>
+									</div>
+								</div>
+								<input class="btn btn-primary total-width" type="submit" value="{% trans %}Valider{% endtrans %}"/>
+								<button type="submit" class="btn btn-primary">Save changes</button>
+							</div>
+							{{ form_end(formTest) }}
+						</div>
+						{{ form_start(form) }}
+						<div class="card">
+							<div class="card-header">
+								<h5 class="card-title mb-0">Private info</h5>
+							</div>
+							<div class="card-body">
+								<div class="row">
+									<div class="mb-3 col-md-6">
+										{{ form_label(form.lastname,'', {'label_attr': {'class': 'form-label'}}) }}
+										{{ form_widget(form.lastname, { 'attr': {'class': 'form-control'} }) }}
+									</div>
+									<div class="mb-3 col-md-6">
+										{{ form_label(form.firstname,'', {'label_attr': {'class': 'form-label'}}) }}
+										{{ form_widget(form.firstname, { 'attr': {'class': 'form-control'} }) }}
+									</div>
+								</div>
+								<div class="mb-3">
+									{{ form_label(form.email,'', {'label_attr': {'class': 'form-label'}}) }}
+									{{ form_widget(form.email, { 'attr': {'class': 'form-control'} }) }}
+								</div>
+								<div class="mb-3">
+									{{ form_label(form.roles,'', {'label_attr': {'class': 'form-label'}}) }}
+									{{ form_widget(form.roles, { 'attr': {'class': 'form-control'} }) }}
+								</div>
+								<div class="mb-3">
+									<label class="form-label" for="inputAddress">Address</label>
+									<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
+								</div>
+								<div class="mb-3">
+									<label class="form-label" for="inputAddress2">Address 2</label>
+									<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
+								</div>
+								<div class="row">
+									<div class="mb-3 col-md-6">
+										<label class="form-label" for="inputCity">City</label>
+										<input type="text" class="form-control" id="inputCity">
+									</div>
+									<div class="mb-3 col-md-4">
+										<label class="form-label" for="inputState">State</label>
+										<select id="inputState" class="form-control">
+											<option selected="">Choose...</option>
+											<option>...</option>
+										</select>
+									</div>
+									<div class="mb-3 col-md-2">
+										<label class="form-label" for="inputZip">Zip</label>
+										<input type="text" class="form-control" id="inputZip">
+									</div>
+								</div>
+								<button type="submit" class="btn btn-primary">Save changes</button>
+							</div>
+						</div>
+						{{ form_end(form) }}
+					</div>
+					
+					<div class="tab-pane fade" id="password" role="tabpanel">
+						<div class="card">
+							<div class="card-body">
+								<h5 class="card-title">Password</h5>
+
+								<div class="mb-3">
+									<label class="form-label" for="inputPasswordCurrent">Current password</label>
+									<input type="password" class="form-control" id="inputPasswordCurrent">
+									<small>
+										<a href="#">Forgot your password?</a>
+									</small>
+								</div>
+
+								<div class="mb-3">
+									<label class="form-label" for="inputPasswordNew">New password</label>
+									<input type="password" class="form-control" id="inputPasswordNew">
+								</div>
+								<div class="mb-3">
+									<label class="form-label" for="inputPasswordNew2">Verify password</label>
+									<input type="password" class="form-control" id="inputPasswordNew2">
+								</div>
+								<input class="btn btn-primary total-width" type="submit" value="{% trans %}Valider{% endtrans %}"/>
+							</div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+		
+	</div>
 {% endblock %}

@@ -141,7 +141,8 @@ import './js/adminlte.js';
 // start the Stimulus application
 import './bootstrap';
 
-import './js/bootstrap/bootstrap.bundle.js';
+import "./js/bootstrap/bootstrap.bundle";
+
 
 // <!-- DataTables  & Plugins -->
 

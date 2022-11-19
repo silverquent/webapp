@@ -35,10 +35,10 @@
 									<div class="team-content">
 										<h3 class="name">{{user.lastname|capitalize}}
 											{{user.firstname|capitalize}}</h3>
-										{% if user.job  is empty %}
-											<h4 class="title">abonné</h4>
+										{% if user.admin  == 1  %}
+											<h4 class="title">Admin</h4>
 										{% else %}
-											<h4 class="title">{{user.job}}</h4>
+												<h4 class="title">abonné</h4>
 										{% endif %}
 									</div>
 									<ul class="social">
@@ -46,7 +46,7 @@
 											<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="fas fa-edit" aria-hidden="true"></a>
 										</li>
 										<li>
-											<a href="{{ path('app_user_show', {'id': user.id}) }}" class="fas fa-eye" aria-hidden="true"></a>
+											<a href="{{ path('profil', {'id': user.id}) }}" class="fas fa-eye" aria-hidden="true"></a>
 										</li>
 									</ul>
 								</div>
