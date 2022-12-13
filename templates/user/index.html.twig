@@ -7,60 +7,104 @@
 	<!-- Content Wrapper. Contains page content -->
 	<div
 		class="content-wrapper">
-		<!-- Content Header (Page header) -->
-		{% include "breadcrumb.html.twig" %}
+
+
 		<!-- Main content -->
-		<section class="content">
+		<section
+			class="content">
+			<!-- Content Header (Page header) -->
+			<div class="row mb-2 mb-xl-3">
+				<div class="col-auto d-none d-sm-block">
+					<h3>
+						<strong></strong>
+						Dashboard</h3>
+				</div>
+				<div class="col-auto ms-auto text-end mt-n1">
+					{% include "breadcrumb.html.twig" %}
+				</div>
+			</div>
+
+
 			<div class="card">
-				<div class="card-header">
-					<h3 class="card-title">Listes exercises</h3>
+				<div class="card-header pb-0">
+					<div class="card-actions float-end">
+						<div class="dropdown position-relative">
+							<a href="#" data-bs-toggle="dropdown" data-bs-display="static" aria-expanded="false" class="">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal align-middle">
+									<circle cx="12" cy="12" r="1"></circle>
+									<circle cx="19" cy="12" r="1"></circle>
+									<circle cx="5" cy="12" r="1"></circle>
+								</svg>
+							</a>
+							<div class="dropdown-menu dropdown-menu-end">
+								<a class="dropdown-item" href="{{ path('app_user_new') }}">Ajouter</a>
+							</div>
+						</div>
+					</div>
+					<h5 class="card-title mb-0">Liste utilisateurs</h5>
 				</div>
 				<!-- /.card-header -->
 				<div
 					class="card-body">
 					<!-- / Met le code ici du tableau  -->
+					<table id="table" class="table table-striped" style="width:100%">
+						<thead>
+							<tr>
+								<th>#</th>
+								<th>Nom</th>
+								<th>Prénom</th>
+								<th>Email</th>
 
-					<div class="row justify-content-center">
-						{% for user in users %}
-							<div class="col-12 col-sm-6 col-md-4 col-lg-3">
-								<div class="our-team">
-									<div class="picture">
+								<th>Actions</th>
+							</tr>
+						</thead>
+						<tbody>
+							{% for user in users %}
+								<tr>
+									<td>
 										{% if user.image  is empty %}
-											<img class="img-fluid" src="{{ asset('/img/avatar/avatar' ~ random(1, 5) ~ '.png' )| imagine_filter('my_thumb') }}"/>
+											<img src="{{ asset('/img/avatar/avatar' ~ random(1, 5) ~ '.png' )| imagine_filter('my_thumb') }}" width="32" height="32" class="rounded-circle my-n1" alt="Avatar">
 										{% else %}
-											<img class="img-fluid" src="{{ asset('/uploads/users/' ~ user.image )| imagine_filter('my_thumb') }}"/>
+											<img src="{{ asset('/uploads/users/' ~ app.user.image )| imagine_filter('my_thumb') }}" width="32" height="32" class="rounded-circle my-n1" alt="Avatar">
 										{% endif %}
+									</td>
+									<td>{{user.lastname|capitalize}}
+									</td>
+									<td>{{user.firstname|capitalize}}</td>
+									<td>{{user.email}}</td>
+									<td>
+										<a href="{{ path('user_show', {'id': user.id}) }}" class="btn btn-success btn-lg me-1 px-3">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-eye align-middle">
+												<path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+												<circle cx="12" cy="12" r="3"></circle>
+											</svg>
+										</a>
+										<a href="{{ path('user_edit', {'id': user.id}) }}" class="btn btn-primary btn-lg me-1 px-3">
+											<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-edit align-middle ">
+												<path d="M11 4H4a2 2 0 0 0-2 2v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2v-7"></path>
+												<path d="M18.5 2.5a2.121 2.121 0 0 1 3 3L12 15l-4 1 1-4 9.5-9.5z"></path>
+											</svg>
+										</a>
+									</td>
+								</tr>
+							{% else %}
+								a Remplir
+							{% endfor %}
+						</tbody>
+						<tfoot>
+							<tr>
+								<th>#</th>
+								<th>Nom</th>
+								<th>Prénom</th>
+								<th>Email</th>
+								<th>Actions</th>
+							</tr>
+						</tfoot>
+					</table>
 
-									</div>
-									<div class="team-content">
-										<h3 class="name">{{user.lastname|capitalize}}
-											{{user.firstname|capitalize}}</h3>
-										{% if user.admin  == 1  %}
-											<h4 class="title">Admin</h4>
-										{% else %}
-												<h4 class="title">abonné</h4>
-										{% endif %}
-									</div>
-									<ul class="social">
-										<li>
-											<a href="{{ path('app_user_edit', {'id': user.id}) }}" class="fas fa-edit" aria-hidden="true"></a>
-										</li>
-										<li>
-											<a href="{{ path('profil', {'id': user.id}) }}" class="fas fa-eye" aria-hidden="true"></a>
-										</li>
-									</ul>
-								</div>
-							</div>
-						{% else %}
-							a Remplir
-						{% endfor %}
-					</div>
-					<a class="btn btn-primary ml-1" href="{{ path('app_user_new') }}">
-						<i class="fa fa-plus"></i>
-					</a>
+
 				</div>
 				<!-- /.card-body -->
-
 
 			</div>
 			<!-- /.card -->

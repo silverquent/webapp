@@ -16,10 +16,10 @@ use Symfony\Component\Routing\Annotation\Route;
 
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 
-#[Route('admin/user')]
+#[Route('')]
 class UserController extends AbstractController
 {
-    #[Route('/', name: 'app_user_index', methods: ['GET'])]
+    #[Route('admin/user', name: 'app_user_index', methods: ['GET'])]
     public function index(UserRepository $userRepository): Response
     {
         return $this->render('user/index.html.twig', [
@@ -27,15 +27,28 @@ class UserController extends AbstractController
         ]);
     }
 
-    #[Route('/{id}', name: 'profil', methods: ['GET'])]
-    public function show(User $user): Response
+
+    #[Route('co/user/{id}', name: 'user_show', methods: ['GET'])]
+    public function show(Request $request, User $user, UserRepository $userRepository): Response
     {
-        return $this->render('user/show.html.twig', [
+
+        $form = $this->createForm(UserType::class, $user);
+        $form->handleRequest($request);
+
+
+
+        return $this->renderForm('user/show.html.twig', [
             'user' => $user,
+            'form' => $form,
+
+
+
         ]);
     }
 
-    #[Route('/new', name: 'app_user_new', methods: ['GET', 'POST'])]
+
+
+    #[Route('admin/user/new', name: 'app_user_new', methods: ['GET', 'POST'])]
     public function new(Request $request, UserRepository $userRepository, UserPasswordHasherInterface $userPasswordHasher): Response
     {
         $user = new User();
@@ -64,25 +77,23 @@ class UserController extends AbstractController
 
 
 
-    #[Route('/{id}/edit', name: 'app_user_edit', methods: ['GET', 'POST'])]
+    #[Route('co/user/{id}/edit', name: 'user_edit', methods: ['GET', 'POST'])]
     public function edit(Request $request, User $user, UserRepository $userRepository): Response
     {
-              
-    
-        $formTest = $this->createForm(UserPassType::class, $user);
-        $formTest->handleRequest($request);    
-        
+
         $form = $this->createForm(UserType::class, $user);
-        $form->handleRequest($request);  
+        $form->handleRequest($request);        
+        $test = [];
+        $test = [
+            'email' => $user->getEmail(),
+            'lastname' => $user->getLastname(),
+            'firstname' => $user->getFirstname(),
+            'username' => $user->getUsername(),
+            'description' => $user->getDescription(),
+        ];
+
 
         if ($form->isSubmitted() && $form->isValid()) {
-           
-            if ($form->get('username')->getData() == null) {
-                
-            } else {
-               
-                $user->setUsername($form->get('username')->getData());
-            }
 
             if ($form->get('images')->getData() == null) {
             } else {
@@ -104,28 +115,24 @@ class UserController extends AbstractController
                 $user->SetImage($fichier);
             }
 
-            if ($formTest->isSubmitted() && $formTest->isValid()) {
-
-
-            }
 
 
             $userRepository->save($user, true);
             $this->addFlash('success', 'Le profil à été mit à jour !');
 
-            return $this->redirectToRoute('app_user_edit', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
+            return $this->redirectToRoute('user_edit', ['id' => $user->getId()], Response::HTTP_SEE_OTHER);
         }
 
         return $this->renderForm('user/edit.html.twig', [
             'user' => $user,
             'form' => $form,
-            'formTest' => $formTest,
-           
-            
+
+
+
         ]);
     }
 
-    #[Route('/{id}', name: 'app_user_delete', methods: ['POST'])]
+    #[Route('admin/user/{id}', name: 'app_user_delete', methods: ['POST'])]
     public function delete(Request $request, User $user, UserRepository $userRepository): Response
     {
         if ($this->isCsrfTokenValid('delete' . $user->getId(), $request->request->get('_token'))) {

@@ -3,172 +3,69 @@
 {% block title %}User
 {% endblock %}
 
-{% block body %}	
+{% block body %}
 	<div class="container-fluid p-0">
 
-		<h1 class="h3 mb-3">Paramètres</h1>
+		<h1 class="h3 mb-3">Profile</h1>
 
 		<div class="row">
-			<div class="col-md-3 col-xl-2">
-
-				<div class="card">
+			<div class="col-md-4 col-xl-3">
+				<div class="card mb-3">
 					<div class="card-header">
-						<h5 class="card-title mb-0">Profil Paramétrage</h5>
+						<h5 class="card-title mb-0">Profile Details</h5>
+					</div>
+					<div class="card-body text-center">
+						{% if user.image  is empty %}
+							<img src="{{ asset('/img/avatar/avatar' ~ random(1, 5) ~ '.png' )| imagine_filter('my_thumb') }}" class="img-fluid rounded-circle mb-2" width="128" height="128">
+						{% else %}
+							<img src="{{ asset('/uploads/users/' ~ app.user.image )| imagine_filter('my_thumb') }}" alt="Christina Mason" class="img-fluid rounded-circle mb-2" width="128" height="128">
+						{% endif %}
+						<h5 class="card-title mb-0">{{user.firstname}}
+							{{user.lastname}}</h5>
+						<div class="text-muted mb-2"></div>
 					</div>
 
-					<div class="list-group list-group-flush" role="tablist">
-						<a class="list-group-item list-group-item-action active" data-bs-toggle="list" href="#account" role="tab" aria-selected="true">
-							Account
-						</a>
-						<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#password" role="tab" aria-selected="false" tabindex="-1">
-							Password
-						</a>
-						<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab" aria-selected="false" tabindex="-1">
-							Privacy and safety
-						</a>
-						<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab" aria-selected="false" tabindex="-1">
-							Email notifications
-						</a>
-						<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab" aria-selected="false" tabindex="-1">
-							Web notifications
-						</a>
-						<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab" aria-selected="false" tabindex="-1">
-							Widgets
-						</a>
-						<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab" aria-selected="false" tabindex="-1">
-							Your data
-						</a>
-						<a class="list-group-item list-group-item-action" data-bs-toggle="list" href="#" role="tab" aria-selected="false" tabindex="-1">
-							Delete account
-						</a>
-					</div>
+					<hr class="my-0">
+					<div class="card-body">
+						<h5 class="h6 card-title">About</h5>
+						<ul class="list-unstyled mb-0">
+							<li class="mb-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-home feather-sm me-1">
+									<path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path>
+									<polyline points="9 22 9 12 15 12 15 22"></polyline>
+								</svg>
+								Adresse:
+								<a href="#">{{user.firstname}}</a>
+							</li>
+
+							<li class="mb-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-briefcase feather-sm me-1">
+									<rect x="2" y="7" width="20" height="14" rx="2" ry="2"></rect>
+									<path d="M16 21V5a2 2 0 0 0-2-2h-4a2 2 0 0 0-2 2v16"></path>
+								</svg>
+								Works at
+								<a href="#">GitHub</a>
+							</li>
+							<li class="mb-1">
+								<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewbox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-map-pin feather-sm me-1">
+									<path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path>
+									<circle cx="12" cy="10" r="3"></circle>
+								</svg>
+								From
+								<a href="#">Boston</a>
+							</li>
+						</ul>
+					</div>					
 				</div>
 			</div>
 
-			<div class="col-md-9 col-xl-10">
-				<div class="tab-content">
-					<div class="tab-pane fade show active" id="account" role="tabpanel">
+			<div class="col-md-8 col-xl-9">
+				<div class="card">
+					<div class="card-header">
 
-						<div class="card">
-							<div class="card-header">
-
-								<h5 class="card-title mb-0">Public info</h5>
-							</div>
-							<div class="card-body">
-								<form>
-									<div class="row">
-										<div class="col-md-8">
-											<div class="mb-3">
-												<label class="form-label" for="inputUsername">Username</label>
-												<input type="text" class="form-control" id="inputUsername" placeholder="Username">
-											</div>
-											<div class="mb-3">
-												<label class="form-label" for="inputUsername">Biography</label>
-												<textarea rows="2" class="form-control" id="inputBio" placeholder="Tell something about yourself"></textarea>
-											</div>
-										</div>
-										<div class="col-md-4">
-											<div class="text-center">
-												{% if user.image  is empty %}
-													<img alt="Utilisateur avatar" src="{{ asset('/img/avatar/avatar' ~ random(1, 5) ~ '.png' )| imagine_filter('my_thumb') }}" class="rounded-circle img-responsive mt-2" width="128" height="128">
-												{% else %}
-													<img alt="Utilisateur photo" src="{{ asset('/uploads/users/' ~ app.user.image )| imagine_filter('my_thumb') }}" class="rounded-circle img-responsive mt-2" width="128" height="128">
-												{% endif %}
-												<div class="mt-2">
-													<span class="btn btn-primary">
-														<i class="fas fa-upload"></i>
-														Upload</span>
-												</div>
-											</div>
-										</div>
-									</div>
-
-									<button type="submit" class="btn btn-primary">Save changes</button>
-								</form>
-
-							</div>
-						</div>
-
-						<div class="card">
-							<div class="card-header">
-
-								<h5 class="card-title mb-0">Private info</h5>
-							</div>
-							<div class="card-body">
-								<form>
-									<div class="row">
-										<div class="mb-3 col-md-6">
-											<label class="form-label" for="inputFirstName">First name</label>
-											<input type="text" class="form-control" id="inputFirstName" placeholder="First name">
-										</div>
-										<div class="mb-3 col-md-6">
-											<label class="form-label" for="inputLastName">Last name</label>
-											<input type="text" class="form-control" id="inputLastName" placeholder="Last name">
-										</div>
-									</div>
-									<div class="mb-3">
-										<label class="form-label" for="inputEmail4">Email</label>
-										<input type="email" class="form-control" id="inputEmail4" placeholder="Email">
-									</div>
-									<div class="mb-3">
-										<label class="form-label" for="inputAddress">Address</label>
-										<input type="text" class="form-control" id="inputAddress" placeholder="1234 Main St">
-									</div>
-									<div class="mb-3">
-										<label class="form-label" for="inputAddress2">Address 2</label>
-										<input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor">
-									</div>
-									<div class="row">
-										<div class="mb-3 col-md-6">
-											<label class="form-label" for="inputCity">City</label>
-											<input type="text" class="form-control" id="inputCity">
-										</div>
-										<div class="mb-3 col-md-4">
-											<label class="form-label" for="inputState">State</label>
-											<select id="inputState" class="form-control">
-												<option selected="">Choose...</option>
-												<option>...</option>
-											</select>
-										</div>
-										<div class="mb-3 col-md-2">
-											<label class="form-label" for="inputZip">Zip</label>
-											<input type="text" class="form-control" id="inputZip">
-										</div>
-									</div>
-									<button type="submit" class="btn btn-primary">Save changes</button>
-								</form>
-
-							</div>
-						</div>
-
+						<h5 class="card-title mb-0">Activities</h5>
 					</div>
-					<div class="tab-pane fade" id="password" role="tabpanel">
-						<div class="card">
-							<div class="card-body">
-								<h5 class="card-title">Password</h5>
 
-								<form>
-									<div class="mb-3">
-										<label class="form-label" for="inputPasswordCurrent">Current password</label>
-										<input type="password" class="form-control" id="inputPasswordCurrent">
-										<small>
-											<a href="#">Forgot your password?</a>
-										</small>
-									</div>
-									<div class="mb-3">
-										<label class="form-label" for="inputPasswordNew">New password</label>
-										<input type="password" class="form-control" id="inputPasswordNew">
-									</div>
-									<div class="mb-3">
-										<label class="form-label" for="inputPasswordNew2">Verify password</label>
-										<input type="password" class="form-control" id="inputPasswordNew2">
-									</div>
-									<button type="submit" class="btn btn-primary">Save changes</button>
-								</form>
-
-							</div>
-						</div>
-					</div>
 				</div>
 			</div>
 		</div>

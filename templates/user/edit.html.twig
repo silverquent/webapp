@@ -1,6 +1,6 @@
 {% extends 'adminBase.html.twig' %}
 
-{% block title %}Edit User
+{% block title %}Paramètres:
 {% endblock %}
 
 {% block body %}
@@ -27,8 +27,18 @@
 	{% endfor %}
 	<!-- /.content-wrapper -->
 	<div class="container-fluid p-0">
-		
-		<h1 class="h3 mb-3">Paramètres</h1>
+
+		<!-- Content Header (Page header) -->
+			<div class="row mb-2 mb-xl-3">
+				<div class="col-auto d-none d-sm-block">
+					<h3>
+						<strong></strong>
+						Dashboard</h3>
+				</div>
+				<div class="col-auto ms-auto text-end mt-n1">
+					{% include "breadcrumb.html.twig" %}
+				</div>
+			</div>
 		<div class="row">
 			<div class="col-md-3 col-xl-2">
 				<div class="card">
@@ -58,18 +68,18 @@
 
 								<h5 class="card-title mb-0">Public info</h5>
 							</div>
-							{{ form_start(formTest) }}
+							{{ form_start(form) }}
 							<div class="card-body">
 
 								<div class="row">
 									<div class="col-md-8">
 										<div class="mb-3">
-											{{ form_label(formTest.username,'', {'label_attr': {'class': 'form-label'}}) }}
-											{{ form_widget(formTest.username, { 'attr': {'class': 'form-control'} }) }}
+											{{ form_label(form.username,'', {'label_attr': {'class': 'form-label'}}) }}
+											{{ form_widget(form.username, { 'attr': {'class': 'form-control'} }) }}
 										</div>
 										<div class="mb-3">
-											{{ form_label(formTest.description,'', {'label_attr': {'class': 'form-label'}}) }}
-											{{ form_widget(formTest.description, { 'attr': {'class': 'form-control'} }) }}
+											{{ form_label(form.description,'', {'label_attr': {'class': 'form-label'}}) }}
+											{{ form_widget(form.description, { 'attr': {'class': 'form-control'} }) }}
 										</div>
 									</div>
 									<div class="col-md-4">
@@ -88,9 +98,9 @@
 								<input class="btn btn-primary total-width" type="submit" value="{% trans %}Valider{% endtrans %}"/>
 								<button type="submit" class="btn btn-primary">Save changes</button>
 							</div>
-							{{ form_end(formTest) }}
+
 						</div>
-						{{ form_start(form) }}
+
 						<div class="card">
 							<div class="card-header">
 								<h5 class="card-title mb-0">Private info</h5>
@@ -144,7 +154,7 @@
 						</div>
 						{{ form_end(form) }}
 					</div>
-					
+
 					<div class="tab-pane fade" id="password" role="tabpanel">
 						<div class="card">
 							<div class="card-body">
@@ -173,6 +183,6 @@
 				</div>
 			</div>
 		</div>
-		
+
 	</div>
 {% endblock %}
