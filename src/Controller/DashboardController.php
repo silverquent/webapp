@@ -16,7 +16,7 @@ class DashboardController extends AbstractController
         ]);
     }
 
-    #[Route('user/dashboard', name: 'dashboardUser')]
+    #[Route('co/dashboard', name: 'dashboardUser')]
     public function dashboardUser(): Response
     {
         return $this->render('dashboard/dashboardUser.html.twig', [

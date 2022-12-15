@@ -2,10 +2,12 @@
 
 {% block title %}Hello CalendarController!
 {% endblock %}
-
+{% block javascripts %}
+	{{ parent() }}
+	{{ encore_entry_script_tags('calendar') }}
+{% endblock %}
 {% block body %}
 	<div class="container-fluid p-0">
-
 		<div class="mb-3">
 			<h1 class="h3 d-inline align-middle">Calendar</h1>
 		</div>
@@ -13,7 +15,14 @@
 		<div class="card">
 			<div class="card-header">
 				<h5 class="card-title">FullCalendar</h5>
-				<h6 class="card-subtitle text-muted">Open source JavaScript plugin for a full-sized, drag &amp; drop event calendar.</h6>
+				<h6 class="card-subtitle text-muted">
+					<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#centeredModalPrimary">
+						Ajax
+					</button>
+					
+					<a class="btn btn-secondary total-width" href="{{ path('new_date') }}">+</a>
+					
+				</h6>
 			</div>
 			<div class="card-body">
 				<div id="calendar"></div>
@@ -21,6 +30,55 @@
 		</div>
 	</div>
 
+{{ form_start(form) }}
+	<div class="modal fade" id="centeredModalPrimary" tabindex="-1" data-bs-backdrop="static" style="display: none;" aria-hidden="true">
+		<div class="modal-dialog modal-dialog-centered" role="document">
+			<div class="modal-content">
+				<div class="modal-header">
+					<h5 class="modal-title">Centered modal</h5>
+					<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+				</div>
+				<div class="modal-body m-3">
+					<p
+						class="mb-0">
+						<!-- /.card-header -->
+						<div
+							class="card-body">
+							<!-- / Met le code ici du tableau  -->
+							<div class="container">
+								
+								<div class="ibox-content">
+									<div class="form-horizontal">
+										<div class="row">
+											<div class="col-lg-6">
+												<div class="form-group">
+													<div class="col-sm-2">
+														{{ form_label(form.start) }}
+													</div>
+													<div class="col-sm-10">
+														{{ form_widget(form.start, { 'attr': {'class': 'form-control'} }) }}
+													</div>
+												</div>
+											</div>
+										</div>
 
-
+									</div>
+								</div>								
+								<div class="hidden">
+									{{ form_widget(form) }}
+								</div>
+							
+							</div>
+						</div>
+						<!-- /.card-body -->
+					</p>
+				</div>
+				<div class="modal-footer">
+					<button type="button" class="btn btn-secondary"  data-bs-dismiss="modal">Fermer</button>
+					<button type="submit" class="btn btn-primary" value="{% trans %}Valider{% endtrans %}">Save changes</button>
+				</div>
+			</div>
+		</div>
+	</div>
+		{{ form_end(form) }}
 {% endblock %}

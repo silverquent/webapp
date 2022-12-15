@@ -12,7 +12,7 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Validator\Constraints\Date;
 
-#[Route('/performances')]
+#[Route('co/performances')]
 class PerformancesController extends AbstractController
 {
     #[Route('/', name: 'app_performances_index', methods: ['GET'])]
