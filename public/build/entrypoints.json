@@ -2,35 +2,38 @@
   "entrypoints": {
     "app": {
       "js": [
-        "/build/runtime.ad9077d3.js",
+        "/build/runtime.4437a57c.js",
         "/build/601.58f30e95.js",
-        "/build/719.1f9b4dca.js",
-        "/build/828.3a4ec4b2.js",
-        "/build/app.d1ba9642.js"
+        "/build/604.05f13d25.js",
+        "/build/538.c349d7b2.js",
+        "/build/704.38c952da.js",
+        "/build/487.c970ff21.js",
+        "/build/app.9e548a14.js"
       ],
       "css": [
         "/build/977.7c334eb0.css",
-        "/build/587.bf9b0ab9.css",
+        "/build/719.bf9b0ab9.css",
         "/build/app.8dbf9951.css"
       ]
     },
     "admin": {
       "js": [
-        "/build/runtime.ad9077d3.js",
+        "/build/runtime.4437a57c.js",
         "/build/601.58f30e95.js",
-        "/build/719.1f9b4dca.js",
-        "/build/733.dd2bc24f.js",
-        "/build/admin.8ced102e.js"
+        "/build/604.05f13d25.js",
+        "/build/538.c349d7b2.js",
+        "/build/309.e98cecf9.js",
+        "/build/487.c970ff21.js",
+        "/build/admin.b99187f2.js"
       ],
       "css": [
         "/build/977.7c334eb0.css",
-        "/build/733.d4eb2c19.css",
-        "/build/admin.e0e0a9e4.css"
+        "/build/admin.e561f6cf.css"
       ]
     },
     "login": {
       "js": [
-        "/build/runtime.ad9077d3.js",
+        "/build/runtime.4437a57c.js",
         "/build/601.58f30e95.js",
         "/build/login.c539d354.js"
       ],
@@ -40,12 +43,25 @@
     },
     "webApp": {
       "js": [
-        "/build/runtime.ad9077d3.js",
-        "/build/webApp.e1163cf8.js"
+        "/build/runtime.4437a57c.js",
+        "/build/webApp.d9fce246.js"
       ],
       "css": [
         "/build/977.7c334eb0.css",
-        "/build/587.bf9b0ab9.css"
+        "/build/719.bf9b0ab9.css"
+      ]
+    },
+    "calendar": {
+      "js": [
+        "/build/runtime.4437a57c.js",
+        "/build/601.58f30e95.js",
+        "/build/604.05f13d25.js",
+        "/build/822.fc3e6f33.js",
+        "/build/487.c970ff21.js",
+        "/build/calendar.dfc3227a.js"
+      ],
+      "css": [
+        "/build/822.d4eb2c19.css"
       ]
     }
   }
